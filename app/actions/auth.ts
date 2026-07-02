@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { deleteSession, setSession } from "../_lib/session";
+import { deleteSession, setSession, SessionUser } from "../_lib/session";
 import dbConnect from "../_lib/dbConnect";
 import User from "../_models/User";
 
@@ -26,7 +26,8 @@ export const loginAction = async (
       return { success: false, message: "Invalid Credentials" };
     }
 
-    await setSession({ name: user.name, email: user.email, id: user.id });
+    const sessionUser: SessionUser = { id: user.id, name: user.name, email: user.email };
+    await setSession(sessionUser);
     loginSuccessful = true;
   } catch (error) {
     console.error("Login error:", error);
@@ -66,7 +67,8 @@ export const registerAction = async (
 
     const newUser = await User.create({ name, email, password });
 
-    await setSession({ name: newUser.name, email: newUser.email, id: newUser.id });
+    const sessionUser: SessionUser = { id: newUser.id, name: newUser.name, email: newUser.email };
+    await setSession(sessionUser);
     registrationSuccessful = true;
   } catch (error) {
     console.error("Registration error:", error);

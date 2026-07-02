@@ -36,7 +36,7 @@ const ContactCarousel = ({ contacts }: { contacts: ContactType[] }) => {
       {contacts.map((contact) => (
         <SwiperSlide key={contact._id}>
           <div className="contact-card">
-            {contact.photo && <Image src={contact.photo} alt={contact.name} width={200} height={200} className='contact-photo'/>}
+            {contact.photo && <Image src={contact.photo} alt={contact.name || 'Contact photo'} width={200} height={200} className='contact-photo'/>}
             <h2>{contact.name}</h2>
             <p>{contact.email}</p>
             {contact.phone && <p>{contact.phone}</p>}

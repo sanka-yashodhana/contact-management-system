@@ -6,7 +6,7 @@ import { getSession } from "./_lib/session";
 const HomePage = async () => {
 
   const user = await getSession();
-  const contacts = await getContacts(user?.id);
+  const contacts = user ? await getContacts(user.id) : [];
 
   return (
     <div>
