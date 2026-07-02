@@ -13,7 +13,7 @@ const RegisterPage = () => {
           Login
         </Link>
       </p>
-    </div>zz
+    </div>
   );
 };
 
